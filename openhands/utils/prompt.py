@@ -81,6 +81,7 @@ class PromptManager:
             FileNotFoundError: If the template file is not found.
         """
         try:
+            print(self.env.get_template(template_name))
             return self.env.get_template(template_name)
         except Exception:
             template_path = os.path.join(self.prompt_dir, template_name)
@@ -90,6 +91,7 @@ class PromptManager:
         from openhands.agenthub.codeact_agent.tools.prompt import refine_prompt
 
         system_message = self.system_template.render(**context).strip()
+        print(refine_prompt(system_message))
         return refine_prompt(system_message)
 
     def get_example_user_message(self) -> str:
